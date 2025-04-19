@@ -18,7 +18,8 @@ contract RideVerifier is Ownable {
         greenToken = GreenToken(_token);
     }
 
-    // Function to set trusted tags (tagId -> publicKey mapping)
+    // Function to set trusted tags for later verification (tagId -> publicKey mapping)
+    // Can only be called by the contract owner
     function setTrustedTag(
         string memory tagId,
         address publicKey
@@ -35,10 +36,10 @@ contract RideVerifier is Ownable {
         bytes memory exitSig,
         address user
     ) public {
-        // Validate Inputs
+        // 1. Ensure exit time is greater (later) than entry time
         require(exitTimestamp > entryTimestamp, "Invalid timestamps");
 
-        // Retrieve Public Keys for Tags Scanned
+        // 2. Use trustedTags to retrieve public keys using tag IDs, make sure both are registered/valid
         address entryTrusted = trustedTags[entryTagId];
         address exitTrusted = trustedTags[exitTagId];
         require(
@@ -46,7 +47,7 @@ contract RideVerifier is Ownable {
             "Unregistered tag"
         );
 
-        // Verify Signatures
+        // 3. Verify Signatures from NFC tags using the public keys
         bytes32 entryMessage = keccak256(
             abi.encodePacked(entryTagId, entryTimestamp, user)
         ).toEthSignedMessageHash();
@@ -62,13 +63,13 @@ contract RideVerifier is Ownable {
             "Invalid exit tag signature"
         );
 
-        // Check if the hashes have been used
+        // 4. Check if the hashes have been used (Prevent replay attacks)
         require(!usedHashes[entryMessage], "Entry already used");
         require(!usedHashes[exitMessage], "Exit already used");
         usedHashes[entryMessage] = true;
         usedHashes[exitMessage] = true;
 
-        // Mint Green Tokens
+        // 5. Verification successful, mint GreenToken to user
         greenToken.mint(user, 10 * 1e18);
     }
 }
