@@ -72,7 +72,7 @@ A decentralized prototype application that rewards users with GreenTokens for ve
 
 ## 📹 Demo Video
 
-[▶️ Watch on Google Drive]([https://drive.google.com/file/d/your-file-id/view?usp=sharing](https://drive.google.com/file/d/1NjPqKXKHQuCfK8_SAjiXBHKbbQU10V26/view?usp=sharing))
+[▶️ Watch on Google Drive](https://drive.google.com/file/d/1NjPqKXKHQuCfK8_SAjiXBHKbbQU10V26/view?usp=sharing)
 
 
 
