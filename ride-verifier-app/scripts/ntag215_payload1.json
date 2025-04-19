@@ -1,0 +1,8 @@
+{
+  "tagId": "BUS_001_STOP_001",
+  "timestamp": 1745008872,
+  "user": "0x1eC46730C4Fa540a62d1Bb7F9D99b0C687a03eD9",
+  "stop": "1",
+  "bus": "1",
+  "sig": "0xc81ed4b3ed9b3290a5fa595e03d934d0cff57379ab4462ba19d1945c46cdb3296c23ebea063bdda078ede9f95e173c551ec6f4b6fbebb39829c9f8a9425073301b"
+}
