@@ -36,6 +36,7 @@ export default function App() {
     const payload = isExit ? tag3payload : tag1payload;
     const { tagId, timestamp, user, stop, bus, sig } = payload;
 
+    // When first entering bus, just set entrance payload and status
     if (!isExit) {
       setEntrancePayload(payload);
       setOnBus(true);
@@ -44,6 +45,7 @@ export default function App() {
       );
       setLoading(false);
     } else {
+      // When exiting bus, make sure entrance payload exists, then send both to smart contract
       if (!entrancePayload) {
         Alert.alert(
           "Missing Entrance Scan",
@@ -56,7 +58,8 @@ export default function App() {
       setStatus(
         `🔄 Verifying your ride from stop ${entrancePayload.stop} to stop ${payload.stop} and minting GreenTokens...`
       );
-      console.log("Verifying ride with payloads:", entrancePayload, payload);
+
+      // Verify ride using smart contract -> User calls contract and therefore pays gas fee
       try {
         const provider = new JsonRpcProvider(ALCHEMY_SEPOLIA);
         const signer = new Wallet(USER_PRIVATE_KEY, provider);
@@ -75,7 +78,7 @@ export default function App() {
         setEntrancePayload(null);
         setOnBus(false);
       } catch (err) {
-        console.error("❌ Verification Error:", err);
+        // Alert user of error both in UI and with popup alert
         setStatus("❌ Verification failed");
         Alert.alert("Transaction failed", err.message || "Unknown error");
       } finally {
