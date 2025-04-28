@@ -1,3 +1,4 @@
+// Used to simulate tag scans in UI due to lack of NFC support in Expo Go
 export const tag3payload = {
   tagId: "BUS_001_STOP_003",
   timestamp: 1745008932,
@@ -16,6 +17,7 @@ export const tag1payload = {
   sig: "0xc81ed4b3ed9b3290a5fa595e03d934d0cff57379ab4462ba19d1945c46cdb3296c23ebea063bdda078ede9f95e173c551ec6f4b6fbebb39829c9f8a9425073301b",
 };
 
+// Used by ethers.js to call smart contract
 export const rideVerifierABI = [
   {
     inputs: [

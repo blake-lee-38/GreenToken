@@ -17,6 +17,7 @@ import {
 } from "ethers";
 import { tag1payload, tag3payload, rideVerifierABI } from "./utils";
 
+// Constants used for demonstration
 const CONTRACT_ADDRESS = "";
 const USER_PRIVATE_KEY = "";
 const ALCHEMY_SEPOLIA = "";
@@ -32,7 +33,11 @@ export default function App() {
 
   const simulateTagScan = async (isExit = false) => {
     setLoading(true);
+
+    // Simulate a delay to mimic the time taken for a real scan
     await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    // Simulate tag scans using preloaded payloads
     const payload = isExit ? tag3payload : tag1payload;
     const { tagId, timestamp, user, stop, bus, sig } = payload;
 
@@ -87,6 +92,7 @@ export default function App() {
     }
   };
 
+  // Default screen: Wait for user to enter wallet address
   if (!walletComplete) {
     return (
       <View style={styles.container}>
@@ -111,6 +117,7 @@ export default function App() {
     );
   }
 
+  // Main screen: User has entered wallet address and is ready to scan tags
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🚇 Ride Verifier</Text>

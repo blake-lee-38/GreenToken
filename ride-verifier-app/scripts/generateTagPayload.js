@@ -5,6 +5,7 @@ const entryTagWallet = new Wallet("");
 const exitTagWallet = new Wallet("");
 const user = ""; // Replace with the user's wallet address
 
+// Get signature using tags private key
 const simulateTagPayload = async (
   tagId,
   timestamp,
@@ -24,7 +25,7 @@ const simulateTagPayload = async (
 
 const now = Math.floor(Date.now() / 1000);
 
-// Usage
+// Generate payloads for entry and exit tags
 const entryPayload = await simulateTagPayload(
   "BUS_001_STOP_001",
   now,
